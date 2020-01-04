@@ -28,7 +28,7 @@ class Contact extends CI_Controller {
         ];
 
         // store message in database as unread message
-        if($this->messages->insert($message)) {
+        if($this->messages->insert($message) == false) {
             $error = ['error' => 'Something went wrong when tring to connect to database please try again later.'];
             return $this->load->view('home', $error);
         }
@@ -39,7 +39,7 @@ class Contact extends CI_Controller {
             return $this->load->view('home', $error);
         }
         
-        $success = ['success' => 'Message has been successfully sent to my email inbox.'];
-        return $this->load->view('home', $success);
+        $this->session->set_flashdata('contact_success', 'Message has been successfully sent to my email inbox.');
+        redirect('#contact');
 	}
 }

@@ -16,7 +16,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?= validation_errors() ?>
 
 		<?php if(isset($error) || isset($success) || isset($warning)) : ?>
-			<p><?= $error || $success || $warning ?></p>
+			<hr/>
+			<p>
+				<?= $error ?? '' ?>
+				<? $warning ?? '' ?>
+				<?= $this->session->flashdata('contact_success') ?></p>
+			<br/>
 		<?php endif; ?>
 
 		<!-- Name  -->
