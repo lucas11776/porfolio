@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Messages_model extends CI_model {
+class Messages_model extends CI_model
+{
 
     /**
      * Model table name in databse
@@ -16,7 +17,8 @@ class Messages_model extends CI_model {
      * @param array $message
      * @return boolean
      */
-    public function insert(array $message) {
+    public function insert(array $message)
+    {
         return $this->db->insert(self::TABLE, $message);
     }
 
@@ -26,7 +28,8 @@ class Messages_model extends CI_model {
      * @param integer $message_id
      * @return boolean
      */
-    public function mark_as_read(int $message_id) {
+    public function mark_as_read(int $message_id)
+    {
         return $this->db->where('message_id', $message_id)
                         ->update(self::TABLE, ['seen' => 1]);
     }
@@ -36,7 +39,8 @@ class Messages_model extends CI_model {
      * 
      * @param 
      */
-    public function delete(int $message_id = NULL) {
+    public function delete(int $message_id = NULL)
+    {
         if($message_id != null) $this->db->where('message_id', $message_id);
         return $this->db->delete(self::TABLE);
     }
