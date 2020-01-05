@@ -23,6 +23,22 @@ class Messages_model extends CI_model
     }
 
     /**
+     * Get message from database
+     * 
+     * @param array
+     * @param integer
+     * @param integer
+     * @return array
+     */
+    public function get(array $where = [], int $limit = NULL, int $offset = NULL)
+    {
+        return $this->db->where($where)
+                    ->order_by('message_id', 'DESC')
+                    ->get(self::TABLE, $limit, $offset)
+                    ->result_array();
+    }
+
+    /**
      * Mark message as seen in databse
      * 
      * @param integer $message_id
