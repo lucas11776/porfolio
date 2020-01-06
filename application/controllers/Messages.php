@@ -12,6 +12,7 @@ class Messages extends CI_Controller
 	 */
     public function index()
     {
+        $this->auth->loggedin();
         $page = [
             'messages' => $this->messages->get(),
             'active' => 'all' // active link
@@ -27,6 +28,7 @@ class Messages extends CI_Controller
 	 */
     public function unread()
     {
+        $this->auth->loggedin();
         $page = [
             'messages' => $this->messages->get(['seen' => 0]),
             'active' => 'unread' // active link
@@ -42,6 +44,7 @@ class Messages extends CI_Controller
 	 */
     public function read()
     {
+        $this->auth->loggedin();
         $page = [
             'messages' => $this->messages->get(['seen' => 1]),
             'active' => 'read' // active link
@@ -57,6 +60,7 @@ class Messages extends CI_Controller
 	 */
     public function single($id)
     {
+        $this->auth->loggedin();
         $page = [
             'message' => $this->messages->get(['message_id' => $id])[0] ?? [],
             'active' => ''
@@ -82,6 +86,8 @@ class Messages extends CI_Controller
 	 */
     public function delete()
     {
+        $this->auth->loggedin();
+        
         $id = is_numeric($this->input->post('id')) ? $this->input->post('id') : NULL;
 
         if(is_null($id))

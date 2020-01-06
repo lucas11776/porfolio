@@ -43,12 +43,13 @@
                             <div class="ui stacked segment">
                                 <?php if($this->session->flashdata('login_error')): ?>
                                     <div class="alert alert-danger alert-dismissible fade show text-left" role="alert">
-                                        <i class="warning icon"></i> <?= $this->session->flashdata('login_error') ?>
+                                        <i class="edit icon"></i> <?= $this->session->flashdata('login_error') ?>
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                 <?php endif; ?>
+                                <input type="hidden" name="redirect" value="<?= $this->input->get('redirect') ?? set_value('redirect') ?>">
                                 <div class="field">
                                     <div class="ui left icon input">
                                         <i class="user icon"></i>
@@ -64,7 +65,8 @@
                                         <i class="lock icon"></i>
                                         <input type="password"
                                                name="password" 
-                                               placeholder="Password...">
+                                               placeholder="Password..."
+                                               value="<?= set_value('password') ?>">
                                     </div>
                                     <p class="text-danger text-left"><?= form_error('password', '* ', '') ?></p>
                                 </div>

@@ -19,17 +19,32 @@ class Login extends CI_Controller
 	 */
     public function index()
     {
+        $this->auth->loggedout();
+
         $this->form_validation->set_rules('email', 'email', 'required|callback_email_exist');
         $this->form_validation->set_rules('password', 'password', 'required');
 
         if($this->form_validation->run() == false)
             return $this->load->view('login');
 
+        // decrypt account password
+        $decrypted_password = $this->encryption->decrypt($this->account['password']);
+        $user_password = $this->input->post('password');
 
+        // check if password match account password
+        if($decrypted_password != $user_password)
+        {
+            $this->session->set_flashdata('login_error', 'Invalid login creaditials please enter correct login credatials.');
+            return $this->load->view('login');
+        }
 
-        // $this->session->set_userdata('uid', $this->account['uid']);
+        // store user data in session
+        $this->session->set_userdata([
+            'user_id' => $this->account['user_id']
+        ]);
 
-        // redirect('dashboard');
+        // redirect to uread message page
+        redirect($this->input->post('redirect') ? $this->input->post('redirect') : 'messages/unread');
     }
     
 
