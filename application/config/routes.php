@@ -57,5 +57,6 @@ $route['messages/unread'] = 'messages/unread';
 $route['messages/read'] = 'messages/read';
 $route['messages/delete'] = 'messages/delete';
 $route['messages/(:num)'] = 'messages/single/$1';
+$route['generate/password'] = 'password/generate';
 $route['404_override'] = 'home';
 $route['translate_uri_dashes'] = FALSE;

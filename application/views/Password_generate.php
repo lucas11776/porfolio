@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <base href="<?= base_url() ?>">
     <!-- Site Properties -->
-    <title>Login To Dashboard</title>
+    <title>Generate Password</title>
     <!-- Semantic CSS File -->
     <link href="assets/lib/semantic/semantic.min.css" rel="stylesheet">
     <!-- Bootstrap CSS File -->
@@ -39,7 +39,7 @@
             <div class="col-sm-8 col-md-4 offset-sm-2 offset-md-4">
                 <div class="ui middle aligned center aligned grid">
                     <div class="column">
-                        <?= form_open('login', ['class' => 'ui large form']) ?>
+                        <?= form_open('generate/password', ['class' => 'ui large form']) ?>
                             <div class="ui stacked segment">
                                 <?php if($this->session->flashdata('login_error')): ?>
                                     <div class="alert alert-danger alert-dismissible fade show text-left" role="alert">
@@ -52,24 +52,23 @@
                                 <div class="field">
                                     <div class="ui left icon input">
                                         <i class="user icon"></i>
-                                        <input type="email"
-                                               name="email" 
-                                               placeholder="E-mail address"
-                                               value="<?= set_value('email') ?>">
+                                        <input type="password"
+                                               name="password" 
+                                               placeholder="Password to generate..."
+                                               value="<?= $this->input->post('password') ?>">
                                     </div>
                                     <p class="text-danger text-left"><?= form_error('email', '* ', '') ?></p>
                                 </div>
                                 <div class="field">
                                     <div class="ui left icon input">
                                         <i class="lock icon"></i>
-                                        <input type="password"
-                                               name="password" 
-                                               placeholder="Password...">
+                                        <input placeholder="Encrypted password..."
+                                               value="<?= $encrypt_password ?>">
                                     </div>
                                     <p class="text-danger text-left"><?= form_error('password', '* ', '') ?></p>
                                 </div>
-                                <button class="ui fluid large primary submit button">
-                                    Login
+                                <button class="ui fluid large icon primary submit button">
+                                    <i class="lock icon"></i> Generate Password
                                 </button>
                             </div>
                         <?= form_close() ?>

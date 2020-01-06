@@ -82,7 +82,7 @@
         </div>
         <?php if(count($messages) == 0): ?>
             <h4 class="text-info font-weight-light text-center">
-                <i class="envelope outline icon"></i> Opss currently you don`t have <?= $active != 'all' ? $active : '' ?> message...
+                <i class="envelope outline icon"></i> Opss currently you don`t have <?= $active != 'all' ? $active : 'any' ?> messages...
             </h4>
         <?php endif; ?>
     </div>
