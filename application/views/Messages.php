@@ -35,21 +35,43 @@
 
     <!-- Message Container -->
     <div class="container pt-5 pb-5">
+
+        <?php if($this->session->flashdata('message_error')): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="warning icon"></i> <?= $this->session->flashdata('message_error') ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('message_success')): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="thumbs up icon"></i> <?= $this->session->flashdata('message_success') ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <div class="ui relaxed divided list">
             <?php foreach($messages as $message): ?>
             <div class="item">
                 <div class="right floated content">
-                    <button class="ui button red" value="<?= $message['message_id'] ?>">
+                    <button class="ui button red delete-message" value="<?= $message['message_id'] ?>">
                         <i class="trash icon"></i> Delete
                     </button>
                 </div>
                 <i class="large envelope middle aligned icon"></i>
                 <div class="content">
-                    <a class="header font-weight-bold" href="">
+                    <a class="header font-weight-bold" href="<?= base_url("messages/{$message['message_id']}") ?>">
                         <strong style="font-size: 18px;"><?= $message['email'] ?></strong>
                     </a>
                     <div class="description pt-2">
                         <strong><?= wordwrap($message['subject']) ?></strong>
+                        <p class="pt-2 pb-2 font-weight-bold small">
+                            <i class="clock icon"></i><?= date(" D, d M Y h:ia", strtotime($message['created'])) ?>
+                        </p>
                     </div>
                     <div class="description">
                         <?= wordwrap($message['message'], 35) ?>
@@ -58,6 +80,11 @@
             </div>
             <?php endforeach; ?>
         </div>
+        <?php if(count($messages) == 0): ?>
+            <h4 class="text-info font-weight-light text-center">
+                <i class="envelope outline icon"></i> Opss currently you don`t have <?= $active != 'all' ? $active : '' ?> message...
+            </h4>
+        <?php endif; ?>
     </div>
 
     <!-- Modal -->
@@ -69,22 +96,25 @@
             <p>Are you sure you want to delete this message in database.</p>
         </div>
         <?= form_open('messages/delete', ['class' => 'actions']) ?>
-            <input type="hidden" name="id" value=""class="delete-message-input">
-            <input type="hidden" name="redirect" value="<?= base_url() ?>">
+            <input type="hidden" name="id" id="delete-message-input">
+            <input type="hidden" name="redirect" value="<?= base_url(uri_string()) ?>">
             <div class="ui red basic cancel inverted button">
                 <i class="remove icon"></i>  No
             </div>
-            <button class="ui green ok inverted button">
+            <button class="ui green ok inverted button" type="submit">
                 <i class="checkmark icon"></i> Yes
             </button>
         <?= form_close() ?>
     </div>
 
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/lib/jquery/jquery.min.js"></script>
+    <script src="assets/lib/jquery/jquery-migrate.min.js"></script>
+    <script src="assets/lib/popper/popper.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/lib/semantic/semantic.min.js"></script>
     <script>
-        $('.ui.button').click(function() {
-            $('.delete-message-input').val($(this).val());
+        $('.ui.button.delete-message').click(function(e) {
+            $('#delete-message-input').val($(this).val());
             $('.ui.basic.modal').modal('toggle');
         });
     </script>
