@@ -407,14 +407,14 @@
 											Form Open Tag
 										-->
 										<?= form_open('contact#contact', ['role' => 'form', 'class' => '']) ?>
-											<?php if(isset($error)): ?>
+											<?php if($this->session->flashdata('contact_form_danger')): ?>
 												<div class="alert alert-danger">
-													<p class="m-0"><i class="fa fa-warning"></i> <?= $error ?></p>
+													<p class="m-0"><i class="fa fa-warning"></i> <?= $this->session->flashdata('contact_form_danger') ?></p>
 												</div>
 											<?php endif; ?>
-											<?php if(isset($warning)): ?>
+											<?php if($this->session->flashdata('contact_form_warning')): ?>
 												<div class="alert alert-warning">
-													<p class="m-0"><i class="fa fa-info-circle"></i> <?= $warning ?></p>
+													<p class="m-0"><i class="fa fa-info-circle"></i> <?= $this->session->flashdata('contact_form_warning') ?></p>
 												</div>
 											<?php endif; ?>
 											<?php if($this->session->flashdata('contact_form_success')): ?>

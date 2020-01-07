@@ -30,17 +30,35 @@ class Contact extends CI_Controller {
 
         // save message in database as unread message
         if($this->messages->insert($message) == false) {
-            $error = ['error' => 'Something went wrong when tring to connect to database please try again later.'];
+            $this->session->set_flashdata('contact_form_danger', 'Something went wrong when tring to connect to database please try again later.');
             return $this->load->view('home', $error);
         }
 
+        // email message (html)
+        $message_html = "
+            <br/>Name : {$message['name']}
+            <br/>Email: <a href=\"mailto:{$message['email']}\">{$message['email']}</a>
+            <br/><br/><hr/><br/>
+            {$message['message']}
+            <br/><br/><br/>
+            <a href=\"".base_url('messages/' . $this->db->insert_id())."\">View message in portfilio</a>";
+
         // send message to Developer email address
-        if(false) {
-            $error = ['warning' => 'Message failed to send in my email inbox I will check your message if I view my website dashboard.'];
-            return $this->load->view('home', $error);
+        $email_data = [
+            'from' => $this->input->post('email'),
+            'to' => $this->developer::EMAIL,
+            'name' => $this->input->post('name'),
+            'subject' => $this->input->post('subject'),
+            'message' => $message_html
+        ];
+
+        // send mail to developer email account
+        if($this->mail->send($email_data) == false) {
+            $this->session->set_flashdata('contact_form_warning', 'Message failed to send in my email inbox I will check your message if I view my website dashboard.');
+            redirect('#contact');
         }
         
-        $this->session->set_flashdata('contact_form_success', 'Message has been successfully sent to my email inbox.');
+        $this->session->set_flashdata('contact_form_success', 'Message has been successfully sent to my email inbox I will get back to you as soon as possible.');
         redirect('#contact');
 	}
 }
