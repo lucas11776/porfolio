@@ -381,6 +381,37 @@
                         <a href="assets/projects/smarthussle/smart-hussle-add-product.png" data-lightbox="smarthussle"></a>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="work-box">
+                        <a href="assets/projects/thembaportfolio/portfolio-0.png" data-lightbox="portfolio">
+                            <div class="work-img">
+                                <img src="assets/projects/thembaportfolio/portfolio-0.png" alt="CyberSpaceInternetCafe system login page." class="img-fluid">
+                            </div>
+                            <div class="work-content">
+                                <div class="row">
+                                    <div class="col-sm-8 col-md-9">
+                                        <h2 class="w-title">
+                                            <span>Portfolio</span>
+                                        </h2>
+                                        <div class="w-more">
+                                            <span class="w-ctegory">Website</span> / 
+                                            <small class="w-date">HTML, CSS, Bootstrap, JavaScript, PHP, CodeIgniter</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <div class="w-like">
+                                            <span class="ion-social-github portfilio-link-btn" value="https://github.com/lucas11776/themba-portfolio"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="assets/projects/thembaportfolio/portfolio-1.png" data-lightbox="portfolio"></a>
+                        <a href="assets/projects/thembaportfolio/portfolio-2.png" data-lightbox="portfolio"></a>
+                        <a href="assets/projects/thembaportfolio/portfolio-3.png" data-lightbox="portfolio"></a>
+                        <a href="assets/projects/thembaportfolio/portfolio-4.png" data-lightbox="portfolio"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

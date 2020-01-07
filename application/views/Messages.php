@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <base href="<?= base_url() ?>">
     <!-- Site Properties -->
-    <title>Login To Dashboard</title>
+    <title><?= $active != 'all' ? $active : 'all' ?> messages.</title>
     <!-- Semantic CSS File -->
     <link href="assets/lib/semantic/semantic.min.css" rel="stylesheet">
     <!-- Bootstrap CSS File -->
@@ -28,7 +28,7 @@
         <a class="item <?= $active == 'read' ? 'active' : '' ?>" href="<?= base_url('messages/read') ?>">
             <i class="envelope open icon"></i> Read
         </a>
-        <a class="item" href="<?= base_url('log') ?>">
+        <a class="item" href="<?= base_url('logout') ?>">
             <i class="sign out icon"></i> Logout
         </a>
     </div>
@@ -62,7 +62,7 @@
                         <i class="trash icon"></i> Delete
                     </button>
                 </div>
-                <i class="large envelope middle aligned icon"></i>
+                <i class="large envelope middle aligned icon <?= $message['seen'] == 0 ? 'text-info' : '' ?>"></i>
                 <div class="content">
                     <a class="header font-weight-bold" href="<?= base_url("messages/{$message['message_id']}") ?>">
                         <strong style="font-size: 18px;"><?= $message['email'] ?></strong>

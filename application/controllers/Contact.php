@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contact extends CI_Controller {
+class Contact extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -54,7 +55,7 @@ class Contact extends CI_Controller {
 
         // send mail to developer email account
         if($this->mail->send($email_data) == false) {
-            $this->session->set_flashdata('contact_form_warning', 'Message failed to send in my email inbox I will check your message if I view my website dashboard.');
+            $this->session->set_flashdata('contact_form_warning', 'Message failed to send to my email inbox I will check your message if I view my website dashboard.');
             redirect('#contact');
         }
         
